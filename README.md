@@ -1,6 +1,6 @@
-# Rubinyun API — examples
+# Rubinyun API examples
 
-[Rubinyun](https://www.chrononsync.com/projects/rubinyun/) schedules and auto-publishes your content to **Instagram** at the time your audience is really online — read from your account's own data. From n8n, Make, a script, or the console. Even with your computer off.
+[Rubinyun](https://www.chrononsync.com/projects/rubinyun/) schedules and auto-publishes your content to **Instagram** at the time your audience is really online, read from your account's own data. From n8n, Make, a script, or the console. Even with your computer off.
 
 This repository holds **usage examples** for the Rubinyun API, in **cURL, Python, Node and PHP**. The Rubinyun engine itself is closed source; here you only find how to call it.
 
@@ -18,7 +18,7 @@ X-WS-Secret: rby_sk_...
 
 ## The API in one minute
 
-Base URL: `https://www.chrononsync.com/rubinyun/api.php` — you pick an action with the `action` parameter.
+Base URL: `https://www.chrononsync.com/rubinyun/api.php`. You pick an action with the `action` parameter.
 
 | action | | what it does |
 |---|---|---|
@@ -27,7 +27,7 @@ Base URL: `https://www.chrononsync.com/rubinyun/api.php` — you pick an action 
 | `list` | GET | your scheduled and published posts |
 | `channels`, `update`, `delete`, `retry`, `insights` | | manage channels and posts |
 
-Responses are JSON. Success is `{"ok": true, ...}`. On error you get `{"ok": false, "code": "...", "error": "..."}` — the `code` is **stable** (e.g. `unauthorized`, `missing_scheduled_at`, `insufficient_tokens`), so branch on the `code`, not on the English message.
+Responses are JSON. Success is `{"ok": true, ...}`. On error you get `{"ok": false, "code": "...", "error": "..."}`: the `code` is **stable** (e.g. `unauthorized`, `missing_scheduled_at`, `insufficient_tokens`), so branch on the `code`, not on the English message.
 
 A token is spent **only when a post actually publishes**, and connecting profiles is free.
 
@@ -46,7 +46,7 @@ Open one, paste your key and secret at the top, and run it.
 
 ## n8n
 
-There is a ready-made **n8n template** — import it and go. It is served from the site and always up to date, so this repo does **not** duplicate it:
+There is a ready-made **n8n template**: import it and go. It is served from the site and always up to date, so this repo does **not** duplicate it.
 
 - Template (import in n8n): <https://www.chrononsync.com/projects/rubinyun/rubinyun-n8n-template.json>
 - Step-by-step guide: <https://www.chrononsync.com/projects/rubinyun/instagram-from-n8n.html>
@@ -59,4 +59,4 @@ There is a ready-made **n8n template** — import it and go. It is served from t
 
 ## License
 
-MIT — see [LICENSE](LICENSE). These examples exist to be copied.
+MIT, see [LICENSE](LICENSE). These examples exist to be copied.
