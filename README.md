@@ -1,3 +1,5 @@
+![Rubinyun: schedule and auto-publish to Instagram](https://www.chrononsync.com/assets/img/og/rubinyun.png)
+
 # Rubinyun API examples
 
 [Rubinyun](https://www.chrononsync.com/projects/rubinyun/) schedules and auto-publishes your content to **Instagram** at the time your audience is really online, read from your account's own data. From n8n, Make, a script, or the console. Even with your computer off.
