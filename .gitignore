@@ -1,0 +1,6 @@
+# Keep your real keys out of git: copy an example, paste your key/secret,
+# and if you save it as .env or *.local it won't be committed.
+.env
+*.local
+node_modules/
+__pycache__/
