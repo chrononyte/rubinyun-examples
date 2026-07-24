@@ -1,4 +1,4 @@
-![Rubinyun: schedule and auto-publish to Instagram](https://www.chrononyte.com/assets/img/og/rubinyun.png)
+![Rubinyun: schedule and auto-publish to Instagram](https://www.chrononyte.com/assets/img/og/rubinyun.png?v=2)
 
 # Rubinyun API examples
 
