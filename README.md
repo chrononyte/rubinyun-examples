@@ -1,15 +1,15 @@
-![Rubinyun: schedule and auto-publish to Instagram](https://www.chrononsync.com/assets/img/og/rubinyun.png)
+![Rubinyun: schedule and auto-publish to Instagram](https://www.chrononyte.com/assets/img/og/rubinyun.png)
 
 # Rubinyun API examples
 
-[Rubinyun](https://www.chrononsync.com/projects/rubinyun/) schedules and auto-publishes your content to **Instagram** at the time your audience is really online, read from your account's own data. From n8n, Make, a script, or the console. Even with your computer off.
+[Rubinyun](https://www.chrononyte.com/projects/rubinyun/) schedules and auto-publishes your content to **Instagram** at the time your audience is really online, read from your account's own data. From n8n, Make, a script, or the console. Even with your computer off.
 
 This repository holds **usage examples** for the Rubinyun API, in **cURL, Python, Node and PHP**. The Rubinyun engine itself is closed source; here you only find how to call it.
 
 ## Get your keys
 
 Create an account and generate an API **key + secret** (the secret is shown once):
-<https://www.chrononsync.com/rubinyun/register.php>
+<https://www.chrononyte.com/rubinyun/register.php>
 
 Every request is authenticated with two headers:
 
@@ -20,7 +20,7 @@ X-WS-Secret: rby_sk_...
 
 ## The API in one minute
 
-Base URL: `https://www.chrononsync.com/rubinyun/api.php`. You pick an action with the `action` parameter.
+Base URL: `https://www.chrononyte.com/rubinyun/api.php`. You pick an action with the `action` parameter.
 
 | action | | what it does |
 |---|---|---|
@@ -33,7 +33,7 @@ Responses are JSON. Success is `{"ok": true, ...}`. On error you get `{"ok": fal
 
 A token is spent **only when a post actually publishes**, and connecting profiles is free.
 
-Full API docs: <https://www.chrononsync.com/projects/rubinyun/docs.html>
+Full API docs: <https://www.chrononyte.com/projects/rubinyun/docs.html>
 
 ## The examples
 
@@ -50,14 +50,14 @@ Open one, paste your key and secret at the top, and run it.
 
 There is a ready-made **n8n template**: import it and go. It is served from the site and always up to date, so this repo does **not** duplicate it.
 
-- Template (import in n8n): <https://www.chrononsync.com/projects/rubinyun/rubinyun-n8n-template.json>
-- Step-by-step guide: <https://www.chrononsync.com/projects/rubinyun/instagram-from-n8n.html>
+- Template (import in n8n): <https://www.chrononyte.com/projects/rubinyun/rubinyun-n8n-template.json>
+- Step-by-step guide: <https://www.chrononyte.com/projects/rubinyun/instagram-from-n8n.html>
 
 ## Links
 
-- Product: <https://www.chrononsync.com/projects/rubinyun/>
-- API docs: <https://www.chrononsync.com/projects/rubinyun/docs.html>
-- Honest comparison with the alternatives: <https://www.chrononsync.com/projects/rubinyun/alternatives.html>
+- Product: <https://www.chrononyte.com/projects/rubinyun/>
+- API docs: <https://www.chrononyte.com/projects/rubinyun/docs.html>
+- Honest comparison with the alternatives: <https://www.chrononyte.com/projects/rubinyun/alternatives.html>
 
 ## License
 
