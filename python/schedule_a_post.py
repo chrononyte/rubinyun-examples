@@ -5,13 +5,13 @@
 2) schedule the post at that time
 
 Standard library only, no `pip install`.
-Docs: https://www.chrononsync.com/projects/rubinyun/docs.html
+Docs: https://www.chrononyte.com/projects/rubinyun/docs.html
 """
 import json
 import urllib.parse
 import urllib.request
 
-API = "https://www.chrononsync.com/rubinyun/api.php"
+API = "https://www.chrononyte.com/rubinyun/api.php"
 KEY = "rby_live_PASTE_YOUR_KEY"
 SECRET = "rby_sk_PASTE_YOUR_SECRET"
 
@@ -37,7 +37,7 @@ print("best time:", when)
 # 2) Schedule the post.
 res = call("add", {
     "type": "image",
-    "image_url": "https://www.chrononsync.com/assets/demo/rubinyun-demo.jpg",
+    "image_url": "https://www.chrononyte.com/assets/demo/rubinyun-demo.jpg",
     "caption": "Posted from Python with Rubinyun",
     "scheduled_at": when,
 })

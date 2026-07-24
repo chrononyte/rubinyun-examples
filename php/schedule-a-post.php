@@ -3,9 +3,9 @@
 //   1) ask for the best time to post next
 //   2) schedule the post at that time
 // Needs the curl extension (bundled with most PHP). Run: php schedule-a-post.php
-// Docs: https://www.chrononsync.com/projects/rubinyun/docs.html
+// Docs: https://www.chrononyte.com/projects/rubinyun/docs.html
 
-const API    = 'https://www.chrononsync.com/rubinyun/api.php';
+const API    = 'https://www.chrononyte.com/rubinyun/api.php';
 const KEY    = 'rby_live_PASTE_YOUR_KEY';
 const SECRET = 'rby_sk_PASTE_YOUR_SECRET';
 
@@ -36,7 +36,7 @@ echo "best time: $when\n";
 // 2) Schedule the post.
 $res = call('add', [
     'type'         => 'image',
-    'image_url'    => 'https://www.chrononsync.com/assets/demo/rubinyun-demo.jpg',
+    'image_url'    => 'https://www.chrononyte.com/assets/demo/rubinyun-demo.jpg',
     'caption'      => 'Posted from PHP with Rubinyun',
     'scheduled_at' => $when,
 ]);

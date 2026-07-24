@@ -2,10 +2,10 @@
 # Schedule an image post to Instagram with Rubinyun.
 #   1) ask for the best time to post next
 #   2) schedule the post at that time
-# Docs: https://www.chrononsync.com/projects/rubinyun/docs.html
+# Docs: https://www.chrononyte.com/projects/rubinyun/docs.html
 set -euo pipefail
 
-API="https://www.chrononsync.com/rubinyun/api.php"
+API="https://www.chrononyte.com/rubinyun/api.php"
 KEY="rby_live_PASTE_YOUR_KEY"
 SECRET="rby_sk_PASTE_YOUR_SECRET"
 
@@ -24,7 +24,7 @@ echo "scheduling for: $WHEN"
 # 2) Schedule the post.
 curl -fsS -X POST "${auth[@]}" "$API?action=add" \
   --data-urlencode "type=image" \
-  --data-urlencode "image_url=https://www.chrononsync.com/assets/demo/rubinyun-demo.jpg" \
+  --data-urlencode "image_url=https://www.chrononyte.com/assets/demo/rubinyun-demo.jpg" \
   --data-urlencode "caption=Posted from a shell script with Rubinyun" \
   --data-urlencode "scheduled_at=$WHEN"
 echo
