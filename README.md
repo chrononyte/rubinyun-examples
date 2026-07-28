@@ -37,14 +37,25 @@ Full API docs: <https://www.chrononyte.com/projects/rubinyun/docs.html>
 
 ## The examples
 
-Each folder does the **same thing**, so you can compare languages: authenticate, ask for the best time, then schedule an image post.
+Each folder does the **same two things**, so you can compare languages.
+
+**Schedule a post** from an image you already host somewhere: authenticate, ask for the best time, schedule.
 
 - [`curl/schedule-a-post.sh`](curl/schedule-a-post.sh)
 - [`python/schedule_a_post.py`](python/schedule_a_post.py)
 - [`node/schedule-a-post.js`](node/schedule-a-post.js)
 - [`php/schedule-a-post.php`](php/schedule-a-post.php)
 
+**Park and post**, for when you have a **file** and nowhere public to put it: upload it, get a public URL back, then schedule with that URL. Takes the file as an argument, so run it as `park-and-post.sh photo.jpg`.
+
+- [`curl/park-and-post.sh`](curl/park-and-post.sh)
+- [`python/park_and_post.py`](python/park_and_post.py)
+- [`node/park-and-post.js`](node/park-and-post.js)
+- [`php/park-and-post.php`](php/park-and-post.php)
+
 Open one, paste your key and secret at the top, and run it.
+
+Three things about parking that are easy to get wrong, and that the examples handle for you: the upload field is called `image` **for videos too** (mp4, mov); the extension is read from the **file name** you send, so keep it (`photo.jpg`, not `photo`); and every upload answers with `parking.used_bytes` and `parking.limit_bytes`, so a script can stop on its own instead of hitting `parking_full` on the next file. It is **parking, not hosting**: the file is deleted the moment the post is published, and expires on its own after 14 days if it never is.
 
 ## n8n
 
