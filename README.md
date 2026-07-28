@@ -24,14 +24,14 @@ Base URL: `https://www.chrononyte.com/rubinyun/api.php`. You pick an action with
 
 | action | | what it does |
 |---|---|---|
-| `besttime` | GET | the best time to post next, worked out from your account's own history |
+| `besttime` | GET | the best time to post next, worked out from your account's own history. It steps around the posts already queued on that channel, so calling it in a loop gives you different times instead of stacking everything on the same minute |
 | `add` | POST | schedule a post: `type` (`image`/`carousel`/`reel`/`story`), `image_url`, `caption`, `scheduled_at` (`YYYY-MM-DD HH:MM`) |
 | `list` | GET | your scheduled and published posts |
 | `channels`, `update`, `delete`, `retry`, `insights` | | manage channels and posts |
 
 Responses are JSON. Success is `{"ok": true, ...}`. On error you get `{"ok": false, "code": "...", "error": "..."}`: the `code` is **stable** (e.g. `unauthorized`, `missing_scheduled_at`, `insufficient_tokens`), so branch on the `code`, not on the English message.
 
-A token is spent **only when a post actually publishes**, and connecting profiles is free.
+A token is spent **only when a post actually publishes**, and connecting profiles is free. If your balance runs out between scheduling and publishing, the post is not published: it turns `failed` with `out of tokens`, you get an email, and it goes out once you top up and call `retry` on it.
 
 Full API docs: <https://www.chrononyte.com/projects/rubinyun/docs.html>
 
