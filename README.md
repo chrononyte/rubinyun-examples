@@ -31,6 +31,8 @@ Base URL: `https://www.chrononyte.com/rubinyun/api.php`. You pick an action with
 
 Responses are JSON. Success is `{"ok": true, ...}`. On error you get `{"ok": false, "code": "...", "error": "..."}`: the `code` is **stable** (e.g. `unauthorized`, `missing_scheduled_at`, `insufficient_tokens`), so branch on the `code`, not on the English message.
 
+A refusal also carries an **HTTP status that says so** (401 wrong keys, 402 out of posts, 400 bad parameter, 413 file too large), never a 200. So a client that only checks the status still notices something went wrong, and one that reads the `code` knows exactly what. Two notes if you write your own client: in Python `urllib` **raises** on a 4xx, so read the body off the exception or you lose the reason; and with `curl -f` the body is thrown away, which is why the shell examples here do not use it.
+
 A token is spent **only when a post actually publishes**, and connecting profiles is free. If your balance runs out between scheduling and publishing, the post is not published: it turns `failed` with `out of tokens`, you get an email, and it goes out once you top up and call `retry` on it.
 
 Full API docs: <https://www.chrononyte.com/projects/rubinyun/docs.html>

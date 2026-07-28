@@ -24,20 +24,23 @@ auth=(-H "X-WS-Key: $KEY" -H "X-WS-Secret: $SECRET")
 # installed it is cleaner: jq -r .url <<<"$json"
 field() { printf '%s' "$2" | grep -oE "\"$1\":(\"[^\"]*\"|[0-9]+)" | head -1 | sed 's/^[^:]*://; s/^"//; s/"$//'; }
 
-# A refusal comes back as HTTP 200 with {"ok":false,"code":"...","error":"..."},
-# so curl -f does not catch it and the script has to look for itself. Without
-# this a rejected file (content_mismatch, file_too_big, parking_full,
-# bad_extension) would kill the script with no message at all.
+# A refusal comes back as a 4xx with a JSON body: {"ok":false,"code":"...",
+# "error":"..."}. Note there is no -f on the curl calls: with it, curl would
+# throw the body away and all you would see is "error: 413", without the code
+# (content_mismatch, file_too_big, parking_full, bad_extension) that tells you
+# what to do about it.
 check() {
   case "$1" in
-    *'"ok":false'*) echo "$1" >&2; exit 1 ;;
+    *'"ok":true'*) return 0 ;;
   esac
+  echo "${1:-no answer from the API}" >&2
+  exit 1
 }
 
 # 1) Park the file. The field is called "image" for videos too, and the
 #    extension is taken from the FILE NAME you send: park it as photo.jpg,
 #    not as photo. curl sends the name for you with @.
-up=$(curl -fsS "${auth[@]}" -F "image=@$FILE" "$BASE/upload.php")
+up=$(curl -sS "${auth[@]}" -F "image=@$FILE" "$BASE/upload.php")
 check "$up"
 URL=$(field url "$up")
 echo "parked -> $URL"
@@ -47,14 +50,14 @@ echo "parked -> $URL"
 echo "parking: $(field used_bytes "$up") of $(field limit_bytes "$up") bytes used"
 
 # 2) Best time to post next, worked out from your account's own history.
-best=$(curl -fsS "${auth[@]}" "$BASE/api.php?action=besttime&when=tomorrow")
+best=$(curl -sS "${auth[@]}" "$BASE/api.php?action=besttime&when=tomorrow")
 check "$best"
 WHEN=$(field at "$best")
 : "${WHEN:=2026-08-01 18:00}"   # fallback if you would rather choose the time yourself
 echo "scheduling for: $WHEN"
 
 # 3) Schedule the post with the parked URL. Use video_url and type=reel for mp4.
-res=$(curl -fsS -X POST "${auth[@]}" "$BASE/api.php?action=add" \
+res=$(curl -sS -X POST "${auth[@]}" "$BASE/api.php?action=add" \
   --data-urlencode "type=image" \
   --data-urlencode "image_url=$URL" \
   --data-urlencode "caption=Parked and posted from a shell script with Rubinyun" \

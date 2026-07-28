@@ -16,6 +16,7 @@ import json
 import mimetypes
 import os
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
@@ -31,8 +32,14 @@ def call(action, data=None):
     """GET if no data, POST (form-urlencoded) if data. Raises on API error."""
     body = urllib.parse.urlencode(data).encode() if data else None
     req = urllib.request.Request(f"{BASE}/api.php?action={action}", data=body, headers=HEADERS)
-    with urllib.request.urlopen(req) as resp:
-        out = json.load(resp)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            out = json.load(resp)
+    except urllib.error.HTTPError as e:
+        # A refusal comes back with a 4xx status AND a JSON body saying why.
+        # urllib raises on 4xx, so the body has to be read off the exception:
+        # without this you would lose the code and see a bare traceback.
+        out = json.load(e)
     if not out.get("ok"):
         raise RuntimeError(f"{out.get('code')}: {out.get('error')}")
     return out
@@ -62,8 +69,11 @@ def park(path):
     ])
     headers = dict(HEADERS, **{"Content-Type": f"multipart/form-data; boundary={boundary}"})
     req = urllib.request.Request(f"{BASE}/upload.php", data=body, headers=headers)
-    with urllib.request.urlopen(req) as resp:
-        out = json.load(resp)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            out = json.load(resp)
+    except urllib.error.HTTPError as e:
+        out = json.load(e)      # 4xx: the reason is in the body, same as above
     if not out.get("ok"):
         # Worth branching on: file_too_big, content_mismatch (a .png that is not
         # a png: the first bytes are checked, not the name), parking_full,
