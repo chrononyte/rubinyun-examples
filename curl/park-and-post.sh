@@ -54,9 +54,10 @@ WHEN=$(field at "$best")
 echo "scheduling for: $WHEN"
 
 # 3) Schedule the post with the parked URL. Use video_url and type=reel for mp4.
-curl -fsS -X POST "${auth[@]}" "$BASE/api.php?action=add" \
+res=$(curl -fsS -X POST "${auth[@]}" "$BASE/api.php?action=add" \
   --data-urlencode "type=image" \
   --data-urlencode "image_url=$URL" \
   --data-urlencode "caption=Parked and posted from a shell script with Rubinyun" \
-  --data-urlencode "scheduled_at=$WHEN"
-echo
+  --data-urlencode "scheduled_at=$WHEN")
+check "$res"
+echo "$res"
